@@ -17,7 +17,7 @@ app.use(cors({
     optionsSuccessStatus: 204,
     maxAge: 10800
 }));
-app.use('/uploads/admin_dashboard', express.static(path.join(__dirname, 'uploads')));
+// app.use('/uploads/admin_dashboard', express.static(path.join(__dirname, 'uploads')));
 var routePath = path.resolve(__dirname) + "/routes/"; //add one folder then put your route files there my router folder name is routers
 fs.readdirSync(routePath).forEach(function (file) {
     const route = require(routePath + file);
