@@ -2,6 +2,7 @@ const common = require("../utils/common");
 const validation = (schema) => {
     return async (req, res, next) => {
         try {
+            console.log(req.body)
             await schema.validate(req.body, { abortEarly: false });
             next();
         } catch (error) {

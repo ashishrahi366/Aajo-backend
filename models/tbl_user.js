@@ -9,9 +9,31 @@ module.exports = (sequelize, DataTypes) => {
     }
     static async createUser(payload) {
       try {
-        await tbl_user.create(payload);
+        const data = await tbl_user.create(payload);
+        return data;
       } catch (error) {
         return error
+      }
+    };
+
+    static async updateUser(payload, id) {
+      try {
+        await tbl_user.update(payload, { where: { user_id: id } });
+      } catch (error) {
+        return error
+      }
+    };
+
+    static async findUser(whereClause) {
+      try {
+        const data = await tbl_user.findOne({
+          raw: true,
+          where: whereClause,
+          attributes: ["user_email", "user_password", "user_id"]
+        });
+        return data;
+      } catch (error) {
+        throw error;
       }
     }
 
