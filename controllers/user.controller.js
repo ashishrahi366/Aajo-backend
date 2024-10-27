@@ -69,10 +69,35 @@ const loginUser = async (req, res) => {
     } catch (error) {
         return common.response(res, 400, false, error.message);
     }
-}
+};
+const deleteProfilePicture = async (req, res) => {
+    try {
+        const reqData = { ...req.body };
+        const deleteImage = await model.tbl_attachments.deleteAttachment(reqData.user_id, commonConfig.user_image_type);
+        return common.response(res, 200, true, "image delete successfully");
+    } catch (error) {
+        return common.response(res, 400, false, error.message);
+    }
+};
+const addProfilePic = async (req, res) => {
+    try {
+        const reqData = { ...req.body };
+        if (!req.file) {
+            return common.response(res, 400, false, "image is required");
+        }
+        await model.tbl_attachments.handleSingle(req.file, reqData.user_id, commonConfig.user_image_type);
+        return common.response(res, 200, true, "success");
+    } catch (error) {
+        return common.response(res, 400, false, error.message);
+    }
+};
+
 
 module.exports = {
     createUser,
     updateUser,
-    loginUser
+    loginUser,
+    deleteProfilePicture,
+    addProfilePic
 }
+

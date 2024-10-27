@@ -98,3 +98,8 @@ exports.login = yup.object({
         .matches(/[a-zA-Z]/, 'Password must contain both uppercase and lowercase letters')
         .matches(/\d/, 'Password must contain at least one number'),
 });
+exports.profilePicDelete = yup.object({
+    user_id: yup
+        .string()
+        .required("user id is required")
+});

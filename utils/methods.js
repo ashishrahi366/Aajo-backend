@@ -17,7 +17,7 @@ const genrateToken = async (data) => {
     } catch (error) {
         return error;
     }
-}
+};
 
 module.exports = {
     hashPassword,
