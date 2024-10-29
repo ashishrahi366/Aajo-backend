@@ -9,28 +9,19 @@ module.exports = {
         allowNull: false,
         autoIncrement: true
       },
-      user_fname: {
+      user_fullName: {
         type: Sequelize.STRING(50),
-        allowNull: false
-      },
-      user_lname: {
-        type: Sequelize.STRING(50)
-      },
-      user_username: {
-        type: Sequelize.STRING(50)
-      },
-      user_email: {
-        type: Sequelize.STRING(50),
-        allowNull: false
-      },
-      user_password: {
-        type: Sequelize.STRING(255),
         allowNull: false
       },
       user_pnumber: {
         type: Sequelize.STRING(50),
         allowNull: false,
         comment: "phone number"
+      },
+      user_dob: {
+        type: Sequelize.STRING(20),
+        allowNull: false,
+        comment: "date of birth"
       },
       user_address: {
         type: Sequelize.STRING(255),
@@ -42,6 +33,13 @@ module.exports = {
       },
       user_zipcode: {
         type: Sequelize.STRING(20)
+      },
+      // user_refrel: {
+      //   type: Sequelize.INTEGER(11)
+      // },
+      user_isHost: {
+        type: Sequelize.TINYINT(1),
+        defaultValue: 0
       },
       user_isActive: {
         type: Sequelize.TINYINT(1),

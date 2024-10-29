@@ -33,7 +33,7 @@ module.exports = {
         allowNull: false
       },
       property_desc: {
-        type: Sequelize.STRING(200),
+        type: Sequelize.TEXT({ length: "long" }),
         allowNull: false
       },
       property_price: {
@@ -44,6 +44,11 @@ module.exports = {
         type: Sequelize.DECIMAL(10, 2),
         allowNull: false
       },
+      property_type: {
+        type: Sequelize.INTEGER(11),
+        allowNull: false,
+        defaultValue: 1 
+      },
       is_active: {
         type: Sequelize.TINYINT(1),
         defaultValue: 1,
@@ -52,15 +57,15 @@ module.exports = {
       is_deleted: {
         type: Sequelize.TINYINT(1),
         defaultValue: 0,
-        allowNull: false  
+        allowNull: false
       },
-      created_at:{
-        type:Sequelize.DATE(),
-        allowNull:false
+      created_at: {
+        type: Sequelize.DATE(),
+        allowNull: false
       },
-      updated_at:{
-        type:Sequelize.DATE(),
-        allowNull:false
+      updated_at: {
+        type: Sequelize.DATE(),
+        allowNull: false
       }
     });
   },
