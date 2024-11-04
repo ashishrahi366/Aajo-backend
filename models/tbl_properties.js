@@ -7,43 +7,6 @@ module.exports = (sequelize, DataTypes) => {
 
     static async getPropertiesBylangLat(userLat, userLng, kmRadius) {
       try {
-        // const data = await tbl_properties.findAll({
-        //   attributes: {
-        //     include: [
-        //       "property_id",
-        //       "property_longitude",
-        //       "property_latitude",
-        //       "property_price",
-        //       [
-        //         Sequelize.literal(`(
-        //           6371 * acos(
-        //             cos(radians(${userLat})) *
-        //             cos(radians(property_latitude)) *
-        //             cos(radians(property_longitude) - radians(${userLng})) +
-        //             sin(radians(${userLat})) *
-        //             sin(radians(property_latitude))
-        //           )
-        //         )`),
-        //         'distance'
-        //       ]
-        //     ]
-        //   },
-        //   where: Sequelize.where(
-        //     Sequelize.literal(`(
-        //       6371 * acos(
-        //         cos(radians(${userLat})) *
-        //         cos(radians(property_latitude)) *
-        //         cos(radians(property_longitude) - radians(${userLng})) +
-        //         sin(radians(${userLat})) *
-        //         sin(radians(property_latitude))
-        //       )
-        //     )`),
-        //     '<=',
-        //     kmRadius // 5 km radius
-        //   ),
-        //   order: Sequelize.literal('distance ASC'),// Order by nearest first
-        //   raw: true,
-        // });
         const data = await tbl_properties.findAll({
           attributes: [
             "property_id",
@@ -78,9 +41,24 @@ module.exports = (sequelize, DataTypes) => {
           ),
           order: Sequelize.literal('distance ASC') // Order by nearest first
         });
-          
+
         return data;
       } catch (error) {
+        return error;
+      }
+    };
+    static async getSingleProperty(whereClause, attributes) {
+      try {
+        console.log(whereClause)
+        let att = attributes ?? { exclude: ["is_active", "is_deleted", "created_at", "updated_at"] };
+        const data = await tbl_properties.findOne({
+          raw: true,
+          where: whereClause,
+          attributes: att
+        });
+        return data;
+      } catch (error) {
+        console.log(error)
         return error;
       }
     };

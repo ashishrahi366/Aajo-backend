@@ -115,3 +115,9 @@ exports.profilePicDelete = yup.object({
         .string()
         .required("user id is required")
 });
+exports.isUserExist = yup.object({
+    user_email: yup
+        .string()
+        .email('Must be a valid email')
+        .required('Email is required'),
+})

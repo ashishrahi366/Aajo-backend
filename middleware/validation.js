@@ -2,12 +2,12 @@ const common = require("../utils/common");
 const validation = (schema) => {
     return async (req, res, next) => {
         try {
-            console.log(req.body)
-            await schema.validate(req.body, { abortEarly: false });
+            const dataToValidate = { ...req.body, ...req.params, ...req.query };
+            await schema.validate(dataToValidate, { abortEarly: false });
             next();
         } catch (error) {
             console.log(error)
-            return common.response(res, 422 , false, error.message, error.errors);   
+            return common.response(res, 422, false, error.message, error.errors);
         }
     }
 };

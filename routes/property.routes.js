@@ -6,7 +6,8 @@ const validation = require("../middleware/validation");
 const { authenticateJWT } = require("../middleware/authorization");
 
 // router.get("/add/properties", controller.addProperty);
-router.post("/properties/search", [validation(schema.getLongLatProperty )], controller.getProperties);
+router.post("/properties/search", [validation(schema.getLongLatProperty)], controller.getProperties);
+router.get("/properties/:propId", [validation(schema.getSingleProperty)], controller.getProprty);
 
 
 module.exports = router

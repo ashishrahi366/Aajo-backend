@@ -11,6 +11,8 @@ router.post("/user/login", [validation(schema.login)], controller.loginUser);
 router.post("/user/update", [validation(schema.updateUser), authenticateJWT], controller.updateUser);
 router.post("/user/delete/profile-pic", [validation(schema.profilePicDelete), authenticateJWT], controller.deleteProfilePicture);
 router.post("/user/add/profile-pic", upload.single("user_image"), [validation(schema.profilePicDelete), authenticateJWT], controller.addProfilePic);
+router.post("/user/is-exist", [validation(schema.isUserExist)], controller.checkEmailIsExist);
+router.get("/user/reg-docType", [], controller.userRegDocTypes);
 
 
 module.exports = router;

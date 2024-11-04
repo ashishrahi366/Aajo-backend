@@ -48,5 +48,5 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'tbl_user_cred',
     timestamps: false
   });
-  return tbl_user_cred;
+  return tbl_user_cred ;
 };

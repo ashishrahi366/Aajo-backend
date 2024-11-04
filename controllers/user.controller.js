@@ -1,7 +1,7 @@
 const model = require("../models");
 const common = require("../utils/common");
 const methods = require("../utils/methods");
-const commonConfig = require("../config/moduleConfigs")
+const moduleConfig = require("../config/moduleConfigs")
 
 
 const createUser = async (req, res) => {
@@ -45,7 +45,7 @@ const createUser = async (req, res) => {
         };
         await model.tbl_user_cred.createCredUser(credPayload);
         if (req.file) {
-            await model.tbl_attachments.handleSingle(req.file, userId, commonConfig.id_document_image_type);
+            await model.tbl_attachments.handleSingle(req.file, userId, moduleConfig.id_document_image_type);
         }
         return common.response(res, 201, true, "success");
     } catch (error) {
@@ -95,7 +95,7 @@ const loginUser = async (req, res) => {
 const deleteProfilePicture = async (req, res) => {
     try {
         const reqData = { ...req.body };
-        const deleteImage = await model.tbl_attachments.deleteAttachment(reqData.user_id, commonConfig.user_image_type);
+        const deleteImage = await model.tbl_attachments.deleteAttachment(reqData.user_id, moduleConfig.user_image_type);
         return common.response(res, 200, true, "image delete successfully");
     } catch (error) {
         return common.response(res, 400, false, error.message);
@@ -107,19 +107,40 @@ const addProfilePic = async (req, res) => {
         if (!req.file) {
             return common.response(res, 400, false, "image is required");
         }
-        await model.tbl_attachments.handleSingle(req.file, reqData.user_id, commonConfig.user_image_type);
+        await model.tbl_attachments.handleSingle(req.file, reqData.user_id, moduleConfig.user_image_type);
         return common.response(res, 200, true, "success");
     } catch (error) {
         return common.response(res, 400, false, error.message);
     }
 };
-
+const checkEmailIsExist = async (req, res) => {
+    try {
+        const reqData = { ...req.body };
+        const isExist = await model.tbl_user_cred.finduser({ cred_user_email: reqData.cred_user_email }, ["cred_user_email"]);
+        if (isExist !== null) {
+            return common.response(res, 400, false, "email already exist");
+        } else {
+            return common.response(res, 200, true, "no record found");
+        }
+    } catch (error) {
+        return common.response(res, 400, false, error.message);
+    }
+};
+const userRegDocTypes = async (req, res) => {
+    try {
+        return common.response(res, 200, true, "success", moduleConfig.documnetTypes);
+    } catch (error) {
+        return common.response(res, 400, false, error.message);
+    }
+};
 
 module.exports = {
     createUser,
     updateUser,
     loginUser,
     deleteProfilePicture,
-    addProfilePic
+    addProfilePic,
+    checkEmailIsExist,
+    userRegDocTypes
 }
 

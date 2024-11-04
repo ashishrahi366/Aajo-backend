@@ -11,4 +11,10 @@ exports.getLongLatProperty = yup.object({
         .required('Longitude is required')
         .min(-180, 'Longitude must be greater than or equal to -180')
         .max(180, 'Longitude must be less than or equal to 180')
+});
+
+exports.getSingleProperty = yup.object({
+    propId: yup
+        .number()
+        .required("property id is required"),
 })

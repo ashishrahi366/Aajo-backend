@@ -1,5 +1,4 @@
 "Sample JSON including LAT. and LONG. around my place (Noida):"
-
 [
   { "latitude": 28.493670264313025, "longitude": 77.40905396593139 },
   { "latitude": 28.493421645877618, "longitude": 77.40704901296544 },
@@ -82,8 +81,4 @@
   { "latitude": 28.496864528736392, "longitude": 77.40936162816094 },
   { "latitude": 28.493115585850088, "longitude": 77.41053392943076 },
   { "latitude": 28.497118193955163, "longitude": 77.41057938730896 }
-]
-
-
-
-
+];
