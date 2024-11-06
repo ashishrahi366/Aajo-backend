@@ -49,7 +49,6 @@ module.exports = (sequelize, DataTypes) => {
     };
     static async getSingleProperty(whereClause, attributes) {
       try {
-        console.log(whereClause)
         let att = attributes ?? { exclude: ["is_active", "is_deleted", "created_at", "updated_at"] };
         const data = await tbl_properties.findOne({
           raw: true,
@@ -58,7 +57,6 @@ module.exports = (sequelize, DataTypes) => {
         });
         return data;
       } catch (error) {
-        console.log(error)
         return error;
       }
     };
@@ -75,11 +73,13 @@ module.exports = (sequelize, DataTypes) => {
     property_address: DataTypes.STRING(255),
     property_longitude: DataTypes.DECIMAL(11, 8),
     property_latitude: DataTypes.DECIMAL(10, 8),
-    property_city: DataTypes.STRING(50),
     property_desc: DataTypes.TEXT({ length: "long" }),
     property_price: DataTypes.DECIMAL(10, 2),
     property_mini_price: DataTypes.DECIMAL(10, 2),
-    property_type: DataTypes.INTEGER(11),
+    property_city: DataTypes.STRING(50),
+    property_zip: DataTypes.STRING(20),
+    property_state: DataTypes.INTEGER(11),
+    property_contry: DataTypes.INTEGER(11),
     is_active: DataTypes.TINYINT(1),
     is_deleted: DataTypes.TINYINT(1),
   }, {

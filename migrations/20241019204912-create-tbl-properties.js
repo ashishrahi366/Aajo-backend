@@ -28,10 +28,6 @@ module.exports = {
         type: Sequelize.DECIMAL(10, 8),
         allowNull: false
       },
-      property_city: {
-        type: Sequelize.STRING(50),
-        allowNull: false
-      },
       property_desc: {
         type: Sequelize.TEXT({ length: "long" }),
         allowNull: false
@@ -44,10 +40,26 @@ module.exports = {
         type: Sequelize.DECIMAL(10, 2),
         allowNull: false
       },
-      property_type: {
+      // property_type: {
+      //   type: Sequelize.INTEGER(11),
+      //   allowNull: false,
+      //   defaultValue: 1
+      // }, 
+      property_city: {
+        type: Sequelize.STRING(50),
+        allowNull: false
+      },
+      property_zip: {
+        type: Sequelize.STRING(20),
+        // allowNull: 
+      },
+      property_state: {
         type: Sequelize.INTEGER(11),
-        allowNull: false,
-        defaultValue: 1 
+        allowNull: false
+      },
+      property_contry: {
+        type: Sequelize.INTEGER(11),
+        allowNull: false
       },
       is_active: {
         type: Sequelize.TINYINT(1),

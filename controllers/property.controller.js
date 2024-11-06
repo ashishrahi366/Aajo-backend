@@ -45,7 +45,7 @@ const addProperty = (req, res) => {
     } catch (error) {
         return common.response(res, 400, false, error.message);
     }
-}
+};  
 
 
 
