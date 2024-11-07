@@ -12,6 +12,10 @@ module.exports = {
         autoIncrement: true,
         allowNull: false
       },
+      property_host_id: {
+        type: Sequelize.INTEGER(11),
+        allowNull: false
+      },
       property_name: {
         type: Sequelize.STRING(50),
         allowNull: false
@@ -40,11 +44,6 @@ module.exports = {
         type: Sequelize.DECIMAL(10, 2),
         allowNull: false
       },
-      // property_type: {
-      //   type: Sequelize.INTEGER(11),
-      //   allowNull: false,
-      //   defaultValue: 1
-      // }, 
       property_city: {
         type: Sequelize.STRING(50),
         allowNull: false
@@ -60,6 +59,12 @@ module.exports = {
       property_contry: {
         type: Sequelize.INTEGER(11),
         allowNull: false
+      },
+      property_contact: {
+        type: Sequelize.STRING(20)
+      },
+      property_email: {
+        type: Sequelize.STRING(50),
       },
       is_active: {
         type: Sequelize.TINYINT(1),

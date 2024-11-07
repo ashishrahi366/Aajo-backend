@@ -6,12 +6,13 @@ module.exports = (sequelize, DataTypes) => {
   class tbl_user_cred extends Model {
     static associate(models) { }
 
-    static async finduser(whereCluase, attributes) {
+    static async findUser(whereCluase, attributes) {
+      let att = attributes ?? ["cred_user_id", "cred_user_email"]
       try {
         const data = await tbl_user_cred.findOne({
           raw: true,
           where: whereCluase,
-          attributes: attributes
+          attributes: att
         });
         return data;
       } catch (error) {
@@ -48,5 +49,5 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'tbl_user_cred',
     timestamps: false
   });
-  return tbl_user_cred ;
+  return tbl_user_cred;
 };

@@ -69,6 +69,7 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
       allowNull: false
     },
+    property_host_id:DataTypes.INTEGER(11),
     property_name: DataTypes.STRING(50),
     property_address: DataTypes.STRING(255),
     property_longitude: DataTypes.DECIMAL(11, 8),
@@ -80,6 +81,8 @@ module.exports = (sequelize, DataTypes) => {
     property_zip: DataTypes.STRING(20),
     property_state: DataTypes.INTEGER(11),
     property_contry: DataTypes.INTEGER(11),
+    property_contact: DataTypes.STRING(20),
+    property_email: DataTypes.STRING(50),
     is_active: DataTypes.TINYINT(1),
     is_deleted: DataTypes.TINYINT(1),
   }, {

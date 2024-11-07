@@ -50,7 +50,7 @@ module.exports = (sequelize, DataTypes) => {
     user_dob: DataTypes.STRING(20),
     user_address: DataTypes.STRING(255),
     user_city: DataTypes.STRING(50),
-    user_zipcode: DataTypes.STRING(20), 
+    user_zipcode: DataTypes.STRING(20),
     user_isHost: DataTypes.TINYINT(1),
     user_isActive: DataTypes.TINYINT(1),
     user_isDelete: DataTypes.TINYINT(1),

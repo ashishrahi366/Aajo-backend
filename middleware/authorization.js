@@ -5,7 +5,6 @@ const commonConfig = require("../config/commonConfig");
 exports.authenticateJWT = async (req, res, next) => {
     try {
         const token = req.headers['authorization'];
-        console.log(token, "token")
         if (!token) {
             return common.response(res, 400, false, "token is required");
         }

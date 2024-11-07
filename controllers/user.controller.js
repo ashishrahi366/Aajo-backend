@@ -7,15 +7,18 @@ const moduleConfig = require("../config/moduleConfigs")
 const createUser = async (req, res) => {
     try {
         const reqData = { ...req.body };
-        let findUser;
-        let isHost = 0;
-        if (reqData.user_isHost == true) {
-            isHost = 1;
-            findUser = await model.tbl_user_cred.findUser({ cred_user_email: reqData.user_email, cred_user_isHost: isHost });
-        } else {
-            findUser = await model.tbl_user_cred.findUser({ cred_user_email: reqData.user_email });
+        if (!req.file) {
+            return common.response(res, 400, false, "id document is required");
         }
-        if (findUser !== null) {
+        let isUser;
+        let isHost = 0;
+        if (reqData.user_isHost == "true") {
+            isHost = 1;
+            isUser = await model.tbl_user_cred.findUser({ cred_user_email: reqData.user_email, cred_user_isHost: isHost });
+        } else {
+            isUser = await model.tbl_user_cred.findUser({ cred_user_email: reqData.user_email });
+        }
+        if (isUser !== null) {
             return common.response(res, 400, false, "user already exist");
         };
         if (reqData.user_password !== reqData.user_confirmPassword) {
@@ -49,6 +52,7 @@ const createUser = async (req, res) => {
         }
         return common.response(res, 201, true, "success");
     } catch (error) {
+        console.log(error)
         return common.response(res, 400, false, error.message);
     }
 };
@@ -72,20 +76,25 @@ const loginUser = async (req, res) => {
     const bcrypt = require('bcrypt');
     try {
         const reqData = { ...req.body };
-        let whereClause = {
-            user_email: reqData.user_email,
-            user_isActive: 1,
-            user_isDelete: 0,
-        }
-        let findUser = await model.tbl_user.findUser(whereClause);
+        let whereClause = { cred_user_email: reqData.user_email };
+        let findUser = await model.tbl_user_cred.findUser(whereClause, ["cred_user_password", "cred_user_id", "cred_id", "cred_user_email"]);
         if (findUser === null) {
             return common.response(res, 200, true, "no record found");
         }
-        const isMatch = await bcrypt.compare(reqData.user_password, findUser.user_password);
+        let userWhereClause = {
+            user_id: findUser.cred_user_id,
+            user_isActive: 1,
+            user_id: 0,
+        };
+        let isActive = await model.tbl_user.findUser({ userWhereClause });
+        if (isActive === null) {
+            return common.response(res, 200, true, "no record found");
+        }
+        const isMatch = await bcrypt.compare(reqData.user_password, findUser.cred_user_password);
         if (!isMatch) {
             return common.response(res, 400, false, "incorrect password");
         }
-        delete findUser.user_password;
+        delete findUser.cred_user_password;
         const token = await methods.genrateToken({ userId: findUser.user_id, email: findUser.user_email });
         return common.response(res, 200, true, "success", { user: findUser, token: token });
     } catch (error) {

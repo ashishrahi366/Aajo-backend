@@ -6,7 +6,6 @@ const validation = (schema) => {
             await schema.validate(dataToValidate, { abortEarly: false });
             next();
         } catch (error) {
-            console.log(error)
             return common.response(res, 422, false, error.message, error.errors);
         }
     }

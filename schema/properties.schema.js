@@ -17,4 +17,37 @@ exports.getSingleProperty = yup.object({
     propId: yup
         .number()
         .required("property id is required"),
+});
+
+exports.createProperty = yup.object({
+    property_name: yup
+        .string()
+        .required("title is required"),
+    property_address: yup
+        .string()
+        .required("address is required"),
+    property_longitude: yup
+        .string()
+        .required("cordinates are required"),
+    property_latitude: yup
+        .string()
+        .required("cordinates are required"),
+    property_city: yup
+        .string()
+        .required("city is required"),
+    property_state: yup
+        .number()
+        .required("state is required"),
+    property_contry: yup
+        .number()
+        .required("country is required"),
+    property_desc: yup
+        .string()
+        .required("description is required"),
+    property_price: yup
+        .number()
+        .required("price is required"),
+    property_mini_price: yup
+        .number()
+        .required("minimum price is required"),
 })
