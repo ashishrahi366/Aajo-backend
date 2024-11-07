@@ -24,7 +24,7 @@ module.exports = {
       book_prop_type: {
         type: Sequelize.TEXT(),
         allowNull: false,
-        comment:"should be JSON array"
+        comment: "should be JSON array"
       },
       book_user_id: {
         type: Sequelize.INTEGER(11),
@@ -47,6 +47,10 @@ module.exports = {
         type: Sequelize.TINYINT(1),
         allowNull: false,
         defaultValue: 0
+      },
+      book_status: {
+        type: Sequelize.INTEGER(11),
+        allowNull: false
       },
       book_added_at: {
         allowNull: false,

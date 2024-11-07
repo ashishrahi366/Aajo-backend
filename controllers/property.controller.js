@@ -1,7 +1,8 @@
 const model = require("../models");
 const common = require("../utils/common");
 const methods = require("../utils/methods");
-const commonConfig = require("../config/moduleConfigs")
+const moduleConfig = require("../config/moduleConfigs");
+
 
 
 
@@ -45,13 +46,29 @@ const addProperty = (req, res) => {
     } catch (error) {
         return common.response(res, 400, false, error.message);
     }
-};  
+};
 
-
-
+//
+const countries = async (req, res) => {
+    try {
+        return common.response(res, 200, true, "success", moduleConfig.countries);
+        // const data;
+    } catch (error) {
+        return common.response(res, 400, false, error.message);
+    }
+};
+const states = async (req, res) => {
+    try {
+        return common.response(res, 200, true, "success", moduleConfig.state);
+    } catch (error) {
+        return common.response(res, 400, false, error.message);
+    }
+}
 
 module.exports = {
     // addProperty,
     getProperties,
-    getProprty
+    getProprty,
+    countries,
+    states
 }

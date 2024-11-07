@@ -24,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     book_price: DataTypes.DOUBLE(10, 2),
     book_is_paid: DataTypes.TINYINT(1),
     book_is_cod: DataTypes.TINYINT(1),
+    book_status: DataTypes.INTEGER(11),
   }, {
     sequelize,
     modelName: 'tbl_bookings',

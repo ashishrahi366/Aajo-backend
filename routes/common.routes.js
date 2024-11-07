@@ -5,10 +5,8 @@ const schema = require("../schema/properties.schema");
 const validation = require("../middleware/validation");
 const { authenticateJWT } = require("../middleware/authorization");
 
-// router.get("/add/properties", controller.addProperty);
-router.post("/properties/search", [validation(schema.getLongLatProperty)], controller.getProperties);
-router.get("/properties/:propId", [validation(schema.getSingleProperty)], controller.getProprty);
+router.get("/common/states", [], controller.states);
+router.get("/common/country", [], controller.countries);
 
 
-
-module.exports = router
+module.exports = router;
